@@ -29,9 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
-        window?.rootViewController = mainViewController
+        window?.rootViewController = AccountSummaryViewController()
         
-        mainViewController.selectedIndex = 1
         return true
     }
 }
