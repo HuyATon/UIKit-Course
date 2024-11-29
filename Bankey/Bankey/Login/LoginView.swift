@@ -21,6 +21,9 @@ class LoginView: UIView {
         
         style()
         layout()
+        
+        usernameTextField.text = "admin"
+        passwordTextField.text = "admin"
     }
     
     required init?(coder: NSCoder) {
