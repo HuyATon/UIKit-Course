@@ -9,6 +9,22 @@ import UIKit
 
 class AccountSummaryCell: UITableViewCell {
     
+    enum AccountType: String {
+        
+        case banking
+        case creditCard
+        case investment
+    }
+    
+    struct ViewModel {
+        
+        let accountType: AccountType
+        let accountName: String
+        let balance: Decimal
+    }
+    
+    let viewModel: ViewModel? = nil
+    
     let typeLabel = UILabel()
     let underlineView = UIView()
     let nameLabel = UILabel()
@@ -33,6 +49,8 @@ class AccountSummaryCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
 }
 
 extension AccountSummaryCell {
@@ -71,7 +89,6 @@ extension AccountSummaryCell {
         
         balanceVStackView.addArrangedSubview(balanceLabel)
         balanceVStackView.addArrangedSubview(balanceAmountLabel)
-        
         
         contentView.addSubview(typeLabel)
         contentView.addSubview(underlineView)
@@ -116,5 +133,28 @@ extension AccountSummaryCell {
             chevronImageView.topAnchor.constraint(equalToSystemSpacingBelow: underlineView.bottomAnchor, multiplier: 1),
             contentView.trailingAnchor.constraint(equalToSystemSpacingAfter: chevronImageView.trailingAnchor, multiplier: 1)
         ])
+    }
+}
+
+extension AccountSummaryCell {
+    
+    func configure(with vm: ViewModel) {
+        
+        typeLabel.text = vm.accountType.rawValue
+        nameLabel.text = vm.accountName
+        
+        switch vm.accountType {
+            case .banking:
+                underlineView.backgroundColor = appColor
+                balanceLabel.text = "Current Balance"
+                
+            case .creditCard:
+                underlineView.backgroundColor = .systemOrange
+                balanceLabel.text = "Balance"
+                
+            case .investment:
+                underlineView.backgroundColor = .systemPurple
+                balanceLabel.text = "Value"
+        }
     }
 }
