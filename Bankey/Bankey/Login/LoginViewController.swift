@@ -172,13 +172,15 @@ extension LoginViewController {
             configureView(withMessage: "User / password cannot be blank.")
         }
         
-        if username == "admin" && password == "admin" {
+        if username == "admin" && password == "admin test" {
             
             signInButton.configuration?.showsActivityIndicator = true
             self.delegate?.didLogIn()
         }
         else {
+            
             configureView(withMessage: "Incorrect username / password")
+            shakeButton()
         }
     }
     
@@ -186,6 +188,16 @@ extension LoginViewController {
         
         errorMessageLabel.isHidden = false
         errorMessageLabel.text = message
+    }
+    private func shakeButton() {
+        let animation = CAKeyframeAnimation()
+        animation.keyPath = "position.x"
+        animation.values = [0, 10, -10, 10, 0]
+        animation.keyTimes = [0, 0.16, 0.5, 0.83, 1]
+        animation.duration = 0.4
+
+        animation.isAdditive = true
+        signInButton.layer.add(animation, forKey: "shake")
     }
 }
 
