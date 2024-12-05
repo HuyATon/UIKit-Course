@@ -11,12 +11,19 @@ import UIKit
 class AccountSummaryViewController: UIViewController {
     
     var accounts = [AccountSummaryCell.ViewModel]()
-    
     var tableView = UITableView()
+    
+    lazy var logoutButtonItem: UIBarButtonItem = {
+        
+        let barButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutTapped))
+        barButtonItem.tintColor = .systemRed
+        return barButtonItem
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setupNavigationBar()
     }
 }
 
@@ -26,7 +33,6 @@ extension AccountSummaryViewController {
         
         setUpTableView()
         setUpTableHeaderView()
-        
         fetchData()
     }
     
@@ -34,6 +40,7 @@ extension AccountSummaryViewController {
         tableView.backgroundColor = appColor
         tableView.delegate = self
         tableView.dataSource = self
+        
         
         tableView.register(AccountSummaryCell.self, forCellReuseIdentifier: AccountSummaryCell.reuseID)
         tableView.rowHeight = AccountSummaryCell.rowHeight
@@ -48,6 +55,11 @@ extension AccountSummaryViewController {
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
+    }
+    
+    private func setupNavigationBar() {
+        navigationItem.rightBarButtonItem = self.logoutButtonItem
+        
     }
     
     private func setUpTableHeaderView() {
@@ -117,5 +129,12 @@ extension AccountSummaryViewController {
         accounts.append(masterCard)
         accounts.append(investment1)
         accounts.append(investment2)
+    }
+}
+
+extension AccountSummaryViewController {
+    
+    @objc func logoutTapped(sender: UIButton) {
+        NotificationCenter.default.post(name: .logout, object: nil)
     }
 }
