@@ -23,6 +23,7 @@
 		BE95BA682CF8730800A18CCD /* AccountSummaryHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE95BA672CF8730800A18CCD /* AccountSummaryHeaderView.xib */; };
 		BEEBCD0D2D0189C60031083B /* NotificationCenter+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEBCD0C2D0189C60031083B /* NotificationCenter+Name.swift */; };
 		BEEBCD0F2D018ED50031083B /* UITextView+SecureToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEBCD0E2D018ED50031083B /* UITextView+SecureToggle.swift */; };
+		BEEBCD122D01A28E0031083B /* ShakeyBellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEBCD112D01A28E0031083B /* ShakeyBellView.swift */; };
 		BEFF17702CF9A04B00F320B6 /* AccountSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFF176F2CF9A04B00F320B6 /* AccountSummaryCell.swift */; };
 		BEFF17722CF9C32F00F320B6 /* DecimalUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFF17712CF9C32F00F320B6 /* DecimalUtils.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		BE95BA672CF8730800A18CCD /* AccountSummaryHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountSummaryHeaderView.xib; sourceTree = "<group>"; };
 		BEEBCD0C2D0189C60031083B /* NotificationCenter+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Name.swift"; sourceTree = "<group>"; };
 		BEEBCD0E2D018ED50031083B /* UITextView+SecureToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+SecureToggle.swift"; sourceTree = "<group>"; };
+		BEEBCD112D01A28E0031083B /* ShakeyBellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeyBellView.swift; sourceTree = "<group>"; };
 		BEFF176F2CF9A04B00F320B6 /* AccountSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSummaryCell.swift; sourceTree = "<group>"; };
 		BEFF17712CF9C32F00F320B6 /* DecimalUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,6 +88,7 @@
 				BE914B402CF6F7F2005A10A0 /* Onboarding */,
 				BE95BA622CF86F1B00A18CCD /* AccountSummary */,
 				BE95BA5B2CF80F1E00A18CCD /* Utils */,
+				BEEBCD102D01A2790031083B /* Components */,
 				BE914B3D2CF6BBAA005A10A0 /* Files */,
 			);
 			path = Bankey;
@@ -140,6 +143,14 @@
 				BEFF176E2CF9A02200F320B6 /* Cells */,
 			);
 			path = AccountSummary;
+			sourceTree = "<group>";
+		};
+		BEEBCD102D01A2790031083B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				BEEBCD112D01A28E0031083B /* ShakeyBellView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		BEFF176D2CF9A01100F320B6 /* Header */ = {
@@ -235,6 +246,7 @@
 				BE95BA5D2CF80F3B00A18CCD /* LocalState.swift in Sources */,
 				BE95BA5A2CF8076700A18CCD /* DummyViewController.swift in Sources */,
 				BE95BA662CF872C500A18CCD /* AccountSummaryHeaderView.swift in Sources */,
+				BEEBCD122D01A28E0031083B /* ShakeyBellView.swift in Sources */,
 				BEFF17722CF9C32F00F320B6 /* DecimalUtils.swift in Sources */,
 				BE914B2C2CF6B8BE005A10A0 /* LoginViewController.swift in Sources */,
 				BEFF17702CF9A04B00F320B6 /* AccountSummaryCell.swift in Sources */,
