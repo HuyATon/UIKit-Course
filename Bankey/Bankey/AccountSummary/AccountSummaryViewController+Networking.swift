@@ -27,6 +27,9 @@ struct Account: Codable {
     let amount: Decimal
     let createdDateTime: Date
     
+    static func makeSkeleton() -> Account {
+        return Account(id: "1", type: .Banking, name: "John Doe", amount: 0.0, createdDateTime: Date())
+    }
 }
 
 
