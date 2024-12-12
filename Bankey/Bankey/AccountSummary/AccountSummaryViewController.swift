@@ -48,9 +48,7 @@ extension AccountSummaryViewController {
         setUpTableHeaderView()
         setUpRefreshControll()
         setUpSkeleton()
-        
-//        fetchAccounts()
-//        fetchData()
+        fetchData()
     }
     
     private func setUpTableView() {
@@ -179,7 +177,7 @@ extension AccountSummaryViewController {
             switch result {
             case .success(let profile):
                 self.profile = profile
-                self.configureTableHeaderView(with: profile)
+                
                     
             case .failure(let error):
                 print(error.localizedDescription)
@@ -193,7 +191,6 @@ extension AccountSummaryViewController {
             switch (result) {
                 case .success(let accounts):
                     self.accounts = accounts
-                    self.configureTableCells(with: accounts)
                     
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -202,11 +199,15 @@ extension AccountSummaryViewController {
         }
         
         group.notify(queue: .main) {
+            
+            guard let profile = self.profile else { return }
+            let accounts = self.accounts
+            
             self.isLoaded = true
             self.tableView.reloadData()
-            DispatchQueue.main.async {
-                self.tableView.refreshControl?.endRefreshing()
-            }
+            self.configureTableHeaderView(with: profile)
+            self.configureTableCells(with: accounts)
+            self.tableView.refreshControl?.endRefreshing()
         }
     }
     
@@ -236,10 +237,16 @@ extension AccountSummaryViewController {
     
     @objc func refreshContent() {
         
-        self.profile = nil
-        self.accounts = []
-        
+        reset()
+        setUpSkeleton()
+        tableView.reloadData()
         fetchData()
-
+    }
+    
+    private func reset() {
+        
+        profile = nil
+        accounts = []
+        isLoaded = false
     }
 }
