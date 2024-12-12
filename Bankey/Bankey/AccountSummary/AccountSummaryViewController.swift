@@ -18,8 +18,10 @@ class AccountSummaryViewController: UIViewController {
     var headerViewModel = AccountSummaryHeaderView.ViewModel(welcomeMessange: "Welcome", name: "", date: Date())
     var accountCellViewModels: [AccountSummaryCell.ViewModel] = []
     
+    // Components
     var tableView = UITableView()
     var headerView = AccountSummaryHeaderView(frame: .zero)
+    let refreshControl = UIRefreshControl()
 
     
     lazy var logoutButtonItem: UIBarButtonItem = {
@@ -42,6 +44,8 @@ extension AccountSummaryViewController {
         
         setUpTableView()
         setUpTableHeaderView()
+        setUpRefreshControll()
+        
 //        fetchAccounts()
         fetchData()
     }
@@ -153,8 +157,10 @@ extension AccountSummaryViewController {
     private func fetchData() {
         
         let group = DispatchGroup()
+        let userId = String(Int.random(in: 1...3))
+
         group.enter()
-        fetchProfile(forUserId: "1") { result in
+        fetchProfile(forUserId: userId) { result in
             switch result {
             case .success(let profile):
                 self.profile = profile
@@ -166,7 +172,9 @@ extension AccountSummaryViewController {
             group.leave()
         }
         group.enter()
-        fetchAccounts(forUserId: "1") { result in
+        
+        
+        fetchAccounts(forUserId: userId) { result in
             switch (result) {
                 case .success(let accounts):
                     self.accounts = accounts
@@ -193,6 +201,28 @@ extension AccountSummaryViewController {
     private func configureTableCells(with accounts: [Account]) {
         self.accountCellViewModels = accounts.map {
             AccountSummaryCell.ViewModel(accountType: $0.type, accountName: $0.name, balance: $0.amount)
+        }
+    }
+}
+
+ // MAKR: Actions
+extension AccountSummaryViewController {
+    
+    func setUpRefreshControll() {
+        
+        self.refreshControl.tintColor = appColor
+        self.refreshControl.addTarget(self, action: #selector(refreshContent), for: .valueChanged)
+        self.tableView.refreshControl = self.refreshControl
+    }
+    
+    @objc func refreshContent() {
+        
+        self.profile = nil
+        self.accounts = []
+        
+        fetchData()
+        DispatchQueue.main.async {
+            self.tableView.refreshControl?.endRefreshing()
         }
     }
 }
