@@ -17,9 +17,18 @@ struct Profile: Codable {
     let id: String
     let firstName: String
     let lastName: String
+}
+
+struct Account: Codable {
     
+    let id: String
+    let type: AccountType
+    let name: String
+    let amount: Decimal
+    let createdDateTime: Date
     
 }
+
 
 extension AccountSummaryViewController {
     
@@ -46,5 +55,7 @@ extension AccountSummaryViewController {
         }
         .resume()
     }
-    
 }
+
+
+
